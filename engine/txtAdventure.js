@@ -39,8 +39,20 @@ jQuery.noConflict();
           msg=$msgInput.val();
           $msgInput.val('');
           addMyMessage(msg);
-          command=findCommandInMessage(msg);
-          exeThisCommand(command);
+          commands=commandFinder(msg);
+          exeThisCommands(commands);
+        }
+
+        function commandFinder(msg){
+          strings=msg.split(', ');
+          rsp= new Array();
+          //console.log(strings);
+          for(var i=0; i<strings.length; i++){
+            tmpRes=findCommandInMessage(strings[i]);
+            if(tmpRes) rsp[i]=tmpRes;
+          }
+          //console.log(res);
+          return rsp;
         }
 
         function findCommandInMessage(msg){
@@ -89,12 +101,15 @@ jQuery.noConflict();
           return res;
         }
 
-        function exeThisCommand(arr){
-          cmd=arr[0];
-          amb=arr[1];
-          if(amb=='CURRENT') execActions(partial.commands[cmd]); // CURRENT
-          else if(amb=='GLOBAL') execActions(json.globalCommands[cmd]); // GLOBAL
-          else sendRandomMessage(randomAws); // RANDOM
+        function exeThisCommands(arr){
+          if(arr.length > 0){
+            for(var i=0; i<arr.length; i++){
+              cmd=arr[i][0];
+              amb=arr[i][1];
+              if(amb=='CURRENT') execActions(partial.commands[cmd]); // CURRENT
+              else if(amb=='GLOBAL') execActions(json.globalCommands[cmd]); // GLOBAL
+            }
+          }else sendRandomMessage(randomAws); // RANDOM
         }
 
         function exeCommand(cmd){
@@ -105,11 +120,12 @@ jQuery.noConflict();
 
         function execActions(actions){
           acts=Object.keys(actions);
-          acts.map(function(o,i){
-            act=o;
-            data=actions[o];
+          console.log(acts, actions);
+          for(var i=0; i<acts.length; i++){
+            act=acts[i];
+            data=actions[act];
             eval(act+'(data)');
-          });
+          };
         }
 
         // MESSAGE FUNCTIONS
