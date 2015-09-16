@@ -1,0 +1,162 @@
+{
+  "variables":{
+    "items":{
+      "pozzione vita":1,
+      "torcia":1,
+      "pietra focaia":1
+    },
+    "status":{
+      "life":[5,5],
+      "force":[5,5]
+    },
+    "randomAws":[
+      "Ma che stai dicendo?!?!",
+      "Inizia a fare sul serio... io rischio la vita qui!!",
+      "Se, certo, poi prendo appuntamento con Pamela Anderson",
+      "Qualcosa di più intelligente?",
+      "Non ho capito",
+      "Non credo sia una buona idea"
+    ]
+  },
+  "textVariables":{
+    "%items%":"itemList"
+  },
+  "globalCommands":{
+    "come sto, come mi sento":{
+      "verifyLifeStatus": ["stai benone", "sei ferito", "stai una schifezza"]
+    },
+    "forza ho":{
+      "verifyForceStatus": ["sei al top", "sei molto stanco", "stai per svenire"]
+    },
+    "cosa in borsa":{
+      "sendMessage": ["in borsa hai solo %items%"]
+    },
+    "show_data":{
+      "log":""
+    }
+  },
+  "events":{
+    "game_start":{
+      "goToStage":["start_game", "intro"]
+    },
+    "game_over":{
+      "sendMessage": ["GAME OVER"],
+      "gameOver":[]
+    },
+    "endGame":{
+      "sendMessage": ["COMPLIMENTI SEI USCITO DALLA GROTTA... HAI COMPLETATO IL GIOCO"],
+      "gameOver":[]
+    }
+  },
+  "stages":{
+    "start_game":{
+      "partials":{
+        "intro":{
+          "messages":[
+            "Ciao, questo è un gioco testuale.",
+            "È stato scritto solo per dimostrare il funzionamento di txtAdventureJs.",
+            "Lo troverai semplice e banale probabilmente.",
+            "A questo punto puoi seguire la guida o puoi iniziare il gioco",
+            "Cosa vuoi fare?"
+          ],
+          "commands":{
+            "seguo guida, guida":{
+              "goToPartial":["guida"]
+            },
+            "inizio":{
+              "goToStage":["stanza1", "intro"]
+            }
+          }
+        },
+        "guida":{
+          "messages":[
+            "Saggia decisione quella di seguire la guida.",
+            "Allora, questo è un gioco testuale, quindi sta a te capire cosa fare e cosa scrivere, ogni situazione può richiedere dei comandi diversi.",
+            "In linea di massima devi sapere che ho scelto di rivolgermi al giocatore in prima persona, perciò dovrai rispondermi usando la prima persona singolare.",
+            "Ci sono dei comandi globali, ad esempio se chiedi \"Come sto?\" o \"Cosa ho in borsa?\" ti risponderò in ogni circostanza.",
+            "Per muoversi in una direzione puoi scrivermi \"mi sposto a nord\" oppure \"vado a nord\" e così via.",
+            "Puoi inoltre usare gli oggetti che hai e che trovi",
+            "Sei pronto ad iniziare il gioco?"
+          ],
+          "commands":{
+            "no":{
+              "sendMessage":["Fa nulla, iniziamo lo stesso, ok?"]
+            },
+            "sì, ok, va bene":{
+              "goToStage":["stanza1", "intro"]
+            }
+          }
+        }
+      }
+    },
+    "stanza1":{
+      "partials":{
+        "intro":{
+          "messages":[
+            "Sei caduto in una buca, non sai quanti metri in profondità sei finito, ringrazi solo il fatto di essere caduto in aqua.",
+            "Stai galleggiando a stento perchè la tua borsa pesa, vedi in penombra una zona asciutta",
+            "cosa fai?"
+          ],
+          "commands":{
+            "nuoto zona asciutta, vado zona asciutta":{
+              "goToPartial":["zona asciutta"]
+            }
+          }
+        },
+        "zona asciutta":{
+          "messages":[
+            "Finamlente sei arrivato all'asciutto, ma non vedi nulla, è troppo buio."
+          ],
+          "commands":{
+            "uso pietra focaia torcia":{
+              "removeItem":["torcia", 1],
+              "goToPartial":["zona asciutta luce"]
+            },
+            "accendo torcia":{
+              "sendMessage":["Questa torcia non si accende da sola, forse avresti dovuto comprare quelle torce magiche che si accendono da sole."]
+            },
+            "_ALL_":{
+              "sendMessage":["Non posso, non vedo quasi nulla"]
+            }
+          }
+        },
+        "zona asciutta luce":{
+          "messages":[
+            "Ora riesci a vedere bene, davanti hai una parete di roccia, sembrerebbe esserci un apertura sulla destra.",
+            "Dietro di te c'è il lago sotteraneo in cui sei caduto."
+          ],
+          "commands":{
+            "vado apertura":{
+              "removeLifePoint":[3],
+              "goToPartial":["apertura"]
+            }
+          }
+        },
+        "apertura":{
+          "messages":[
+            "Avvicinandoti all'apertura senti strani rumori.",
+            "Non appena avvicini la torcia all'apertura escono centinaia di pipistrelli, alcuni ti colpiscono il volto.",
+            "Vai in confusione e cadi a terra.",
+            "Sei molto dolorante"
+          ],
+          "commands":{
+            "entro apertura":{
+              "goToPartial": ["risalita"]
+            }
+          }
+        },
+        "risalita":{
+          "messages":[
+            "Noti che la strada all'interno dell'apertura è in salita, in fondo c'è una luce.",
+            "Cosa fai?"
+          ],
+          "commands":{
+            "vado verso luce":{
+              "event":["endGame"]
+            }
+          }
+        }
+      }
+    }
+  }
+}
