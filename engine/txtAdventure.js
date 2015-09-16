@@ -132,7 +132,8 @@ jQuery.noConflict();
           for(var i=0; i<textVariables.length; i++){
             o=textVariables[i];
             if (msg.indexOf(o) != -1){
-              text=eval(json.textVariables[o]+'()');
+              action=json.textVariables[o];
+              text=eval(action[0]+'("'+action[1]+'")');
               msg=msg.replace(o, text);
             }
           }
@@ -168,7 +169,6 @@ jQuery.noConflict();
         function sendMessages(data){
           if( Object.prototype.toString.call(data) === '[object Array]' ){
             for(var i=0; i<data.length; i++){
-              console.log(data[i]);
               addHeroMessage(data[i]);
             };
           }else{
@@ -186,36 +186,12 @@ jQuery.noConflict();
           addHeroMessage(data[randomN]);
         }
 
-        function verifyLifeStatus(data){
-          msgs=['bene', 'così così', 'male'];
-          $.extend(msgs, data);
-
-          lLv=json.variables.status.life[0];
-          lMax=json.variables.status.life[1];
-          if(lLv<lMax/4){
-            message=msgs[2];
-          }else if(lLv<lMax/2){
-            message=msgs[1];
-          }else{
-            message=msgs[0];
-          }
-          addHeroMessage(message);
+        function verifyStatus(data){
+          return json.variables.status[data];
         }
 
-        function verifyForceStatus(data){
-          msgs=['abbastanza', 'così così', 'svengo'];
-          $.extend(msgs, data);
-
-          lLv=json.variables.status.force[0];
-          lMax=json.variables.status.force[1];
-          if(lLv<lMax/4){
-            message=msgs[2];
-          }else if(lLv<lMax/2){
-            message=msgs[1];
-          }else{
-            message=msgs[0];
-          }
-          addHeroMessage(message);
+        function changeStatus(data){
+          json.variables.status[data[0]]=data[1];
         }
 
         function itemList(){

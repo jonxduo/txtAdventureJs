@@ -6,8 +6,8 @@
       "pietra focaia":1
     },
     "status":{
-      "life":[5,5],
-      "force":[5,5]
+      "vita":"benone",
+      "forza":"piene"
     },
     "randomAws":[
       "Ma che stai dicendo?!?!",
@@ -19,17 +19,19 @@
     ]
   },
   "textVariables":{
-    "%items%":"itemList"
+    "%items%":["itemList"],
+    "%vita%":["verifyStatus", "vita"],
+    "%forza%":["verifyStatus", "forza"]
   },
   "globalCommands":{
     "come sto, come mi sento":{
-      "verifyLifeStatus": ["stai benone", "sei ferito", "stai una schifezza"]
+      "sendMessage": ["Stai %vita%"]
     },
     "forza ho":{
-      "verifyForceStatus": ["sei al top", "sei molto stanco", "stai per svenire"]
+      "sendMessage": ["Sei in %forza% forze"]
     },
     "cosa in borsa":{
-      "sendMessage": ["in borsa hai solo %items%"]
+      "sendMessage": ["In borsa hai solo %items%"]
     },
     "show_data":{
       "log":""
