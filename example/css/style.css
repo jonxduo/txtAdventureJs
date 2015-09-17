@@ -6,18 +6,18 @@ body{
   margin:0px;
   background:url(../img/texture.png);
   font-size: 14px;
-  line-height:120%;
   color:#59bf73;
   font-family: 'Press Start 2P', cursive;
 }
 body, *{
   color:#59bf73;
-  line-height:120%;;
+  line-height:150%;;
   box-sizing: border-box;
 }
 
 form{
   position:relative;
+  line-height:200%;
 }
 
 input#myMsg{
@@ -32,6 +32,7 @@ input#myMsg{
   font-size: 14px;
   color:#59bf73;
   font-family: 'Press Start 2P', cursive;
+  line-height:200%;
 }
 
 input#myMsg:focus{
@@ -69,4 +70,6 @@ h1{
 
 .msgForm{
   border-top:1px solid #59bf73;
+  margin-top:15px;
+  padding-top: 10px;
 }
