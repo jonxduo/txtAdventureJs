@@ -129,7 +129,7 @@
           ],
           "commands":{
             "vado apertura":{
-              "removeLifePoint":[3],
+              "changeStatus":["vita", "un po malconcio"],
               "goToPartial":["apertura"]
             }
           }
