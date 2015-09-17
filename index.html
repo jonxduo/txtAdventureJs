@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Example for txtAdventureJs</title>
+    <link rel="stylesheet" href="example/css/style.css" media="screen" title="no title" charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="engine/txtAdventure.js"></script>
+    <script type="text/javascript">
+      jQuery(function($){
+        $('body').txtAdventure({
+          '_FILE_':'example/stories/dungeon.json'
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <pre>
+      __            __     _____       .___             __
+    _/  |____  ____/  |_  /  _  \    __| _/__  __ _____/  |_ __ _________   ____
+    \   __\  \/  /\   __\/  /_\  \  / __ |\  \/ // __ \   __\  |  \_  __ \_/ __ \
+     |  |  >    <  |  | /    |    \/ /_/ | \   /\  ___/|  | |  |  /|  | \/\  ___/
+     |__| /__/\_ \ |__| \____|__  /\____ |  \_/  \___  >__| |____/ |__|    \___  >
+                \/              \/      \/           \/                        \/
+    </pre>
+    <div class="wrapper">
+      <div class="gameContent">
+        <div class="msgArea">
+        </div>
+        <div class="msgForm">
+          <form>
+            > <input id="myMsg" type="text" name="message" value="" autocomplete="off"/>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
